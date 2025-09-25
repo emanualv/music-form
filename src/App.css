@@ -1,38 +1,121 @@
+/* Global reset */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafc;
+  color: #333;
+  line-height: 1.6;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-height: 100vh;
+}
+
+/* Header / Hero */
+header {
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
   color: white;
+  text-align: center;
+  padding: 100px 20px;
 }
 
-.App-link {
-  color: #61dafb;
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+header p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  opacity: 0.9;
+}
+
+header button {
+  background-color: #ff6b6b;
+  border: none;
+  padding: 14px 32px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+header button:hover {
+  background-color: #e84141;
+}
+
+/* Features */
+section.features {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 60px 20px;
+  flex-wrap: wrap;
+  background: #fff;
+}
+
+.feature-card {
+  background: #f0f2f8;
+  padding: 30px;
+  border-radius: 10px;
+  flex: 1 1 250px;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: #4e54c8;
+}
+
+/* Contact */
+section.contact {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f9fafc;
+}
+
+section.contact input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+section.contact button {
+  background-color: #4e54c8;
+  border: none;
+  padding: 12px 24px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+section.contact button:hover {
+  background-color: #3c3fa1;
+}
+
+/* Footer */
+footer {
+  background: #2d2e32;
+  color: #aaa;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+  font-size: 0.9rem;
 }

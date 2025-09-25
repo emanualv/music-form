@@ -1,27 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
+import "./App.css";
 
-export default function MyForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    alert("Form submitted!");
-  };
-
+function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md space-y-6"
-      >
+    <div className="App">
+      {/* Hero Section */}
+      <header>
+        <h1>EMANUAL'S MUSIC ACADEMY</h1>
+        <p>
+          Learn music the smart way — interactive lessons, guided practice, and
+          progress tracking for beginners and professionals.
+        </p>
+        <button>Get Started</button>
+      </header>
 
+      {/* Features */}
+      <section className="features">
+        <div className="feature-card">
+          <h3>Interactive Lessons</h3>
+          <p>Structured tutorials designed for every skill level.</p>
+        </div>
+        <div className="feature-card">
+          <h3>Practice Tools</h3>
+          <p>Fun and engaging exercises to build your rhythm and skills.</p>
+        </div>
+        <div className="feature-card">
+          <h3>Track Progress</h3>
+          <p>Monitor your learning journey and celebrate milestones.</p>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section className="contact">
+        <h2>Join Our Music Community</h2>
+        <p>Sign up for free tips, updates, and exclusive lessons.</p>
+        <div style={{ marginTop: "20px" }}>
+          <input type="email" placeholder="Enter your email" />
+          <button>Subscribe</button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer>© 2025 My Music Academy. All rights reserved.</footer>
+    </div>
+  );
+}
+
+export default App;
