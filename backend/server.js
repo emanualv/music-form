@@ -6,31 +6,49 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to MySQL
+// MySQL connection
 const db = mysql.createConnection({
-  host: "localhost",       // your host
-  user: "your_username",   // your MySQL user
-  password: "your_password",
+  host: "localhost",
+  user: "root",       // your MySQL username
+  password: "",       // your MySQL password
   database: "music-form"
 });
 
 db.connect(err => {
-  if (err) {
-    console.log("DB connection error:", err);
-    return;
-  }
+  if (err) return console.log("DB error:", err);
   console.log("Connected to MySQL");
 });
 
-// POST route to save email
+// ---------------- Subscribe Route ----------------
 app.post("/subscribe", (req, res) => {
   const { email } = req.body;
-  if (!email) return res.status(400).send("Email is required");
+  if (!email) return res.status(400).send("Email required");
 
-  db.query("INSERT INTO subscribers (email) VALUES (?)", [email], (err, results) => {
-    if (err) return res.status(500).send(err);
-    res.json({ id: results.insertId, email });
-  });
+  db.query(
+    "INSERT INTO subscribers (email) VALUES (?)",
+    [email],
+    (err, result) => {
+      if (err) return res.status(500).send(err);
+      res.json({ id: result.insertId, email });
+    }
+  );
 });
 
-app.listen(5000, () => console.log("Backend running on port 5000"));
+// ---------------- Contact Route ----------------
+app.post("/contact", (req, res) => {
+  const { name, email, address } = req.body;
+  if (!name || !email || !address)
+    return res.status(400).send("All fields are required");
+
+  db.query(
+    "INSERT INTO users (name, email, address) VALUES (?, ?, ?)",
+    [name, email, address],
+    (err, result) => {
+      if (err) return res.status(500).send(err);
+      res.json({ id: result.insertId, name, email, address });
+    }
+  );
+});
+
+app.listen(5000, () => console.log("Server running on port 5000"));
+    
