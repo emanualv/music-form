@@ -6,11 +6,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MySQL connection
+// Connect to MySQL
 const db = mysql.createConnection({
   host: "localhost",
-  user: "root",       // your MySQL username
-  password: "",       // your MySQL password
+  user: "root",
+  password: "",
   database: "music-form"
 });
 
@@ -19,36 +19,50 @@ db.connect(err => {
   console.log("Connected to MySQL");
 });
 
-// ---------------- Subscribe Route ----------------
+// ---------------- Subscribe Form ----------------
 app.post("/subscribe", (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).send("Email required");
 
-  db.query(
-    "INSERT INTO subscribers (email) VALUES (?)",
-    [email],
-    (err, result) => {
-      if (err) return res.status(500).send(err);
-      res.json({ id: result.insertId, email });
+  db.query("INSERT INTO subscribers (email) VALUES (?)", [email], (err, result) => {
+    if (err) {
+      console.error("DB error on /subscribe:", err);
+      return res.status(500).send(err);
     }
-  );
+    console.log("Inserted subscriber:", result.insertId); // debug log
+    res.json({ id: result.insertId, email });
+  });
 });
 
-// ---------------- Contact Route ----------------
+// ---------------- Get Started Form ----------------
 app.post("/contact", (req, res) => {
   const { name, email, address } = req.body;
-  if (!name || !email || !address)
-    return res.status(400).send("All fields are required");
 
-  db.query(
-    "INSERT INTO users (name, email, address) VALUES (?, ?, ?)",
-    [name, email, address],
-    (err, result) => {
-      if (err) return res.status(500).send(err);
-      res.json({ id: result.insertId, name, email, address });
+  const sql = "INSERT INTO users (name, email, address) VALUES (?, ?, ?)";
+  db.query(sql, [name, email, address], (err, result) => {
+    if (err) {
+      console.error("DB error:", err); // <-- logs exact MySQL error in terminal
+      return res.status(500).send("Database error: " + err.message);
     }
-  );
+    res.send("Contact saved successfully!");
+  });
 });
 
+
+// ---------------- Optional: View data ----------------
+app.get("/subscribers", (req, res) => {
+  db.query("SELECT * FROM subscribers", (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+app.get("/users", (req, res) => {
+  db.query("SELECT * FROM users", (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// ---------------- Start Server ----------------
 app.listen(5000, () => console.log("Server running on port 5000"));
-    

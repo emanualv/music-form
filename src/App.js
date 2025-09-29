@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 
-
-
 // ---------------- Home Page ----------------
 function Home() {
   const [email, setEmail] = useState("");
