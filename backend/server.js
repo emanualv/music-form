@@ -8,10 +8,10 @@ app.use(express.json());
 
 // Connect to MySQL
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "music-form"
+  host: "dpg-d3d2tl37mgec73b08qjg-a",
+  user: "music_form_backdb_user",
+  password: "XYJGS0MC0BDL7fIALyirG8TYQushFe2U",
+  database: "music_form_backdb"
 });
 
 db.connect(err => {
