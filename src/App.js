@@ -98,7 +98,7 @@ function GetStarted() {
     console.log("Form submitted:", formData);
 
     try {
-      const res = await fetch("https://music-form-backend.onrender.com", {
+      const res = await fetch("", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
